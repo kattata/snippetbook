@@ -1,3 +1,5 @@
+import Input from "~/components/input";
+
 export default function CreateSnippet() {
   return (
     <div className="absolute left-80 top-0 w-[calc(100%-320px)] h-full">
@@ -5,40 +7,22 @@ export default function CreateSnippet() {
         <h1 className="font-bold text-2xl mb-4">Add a new code snippet</h1>
         <div className="flex justify-between gap-5">
           <div className="w-full">
-            <div className="flex flex-col">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                id="title"
-                className="border-solid border-slate-400 border rounded-sm px-2 py-1 text-slate-400"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="description">Description</label>
-              <textarea
-                name="description"
-                id="description"
-                rows="10"
-                className="border-solid border-slate-400 border rounded-sm px-2 py-1 text-slate-400"
-              ></textarea>
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="language">Language</label>
-              <input
-                type="text"
-                id="language"
-                className="border-solid border-slate-400 border rounded-sm px-2 py-1 text-slate-400"
-              />
-            </div>
+            <Input label="Title" name="title" />
+            <Input
+              label="Description"
+              isTextarea="true"
+              name="description"
+              rows="10"
+            />
+            <Input label="Language" name="language" />
           </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="snippet">Code snippet</label>
-            <textarea
+          <div className="w-full">
+            <Input
+              label="Code snippet"
+              isTextarea="true"
               name="snippet"
-              id="snippet"
               rows="20"
-              className="border-solid border-slate-400 border rounded-sm px-2 py-1 text-slate-400"
-            ></textarea>
+            />
           </div>
         </div>
         <button
