@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "remix";
 import styles from "~/tailwind.css";
+import SideBar from "./components/sidebar";
 
 export const links = () => [
   {
@@ -19,7 +20,7 @@ export const links = () => [
 export function meta() {
   return {
     charset: "utf-8",
-    title: "Remix + MongoDB",
+    title: "SnippetBook",
     viewport: "width=device-width,initial-scale=1",
   };
 }
@@ -31,12 +32,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-100 text-slate-800 font-sans p-4">
-        <header className="pb-3 mb-4 border-b-2">
-          <Link to="/" className="hover:underline text-blue-600">
-            Home
-          </Link>
-        </header>
+      <body>
+        <SideBar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
