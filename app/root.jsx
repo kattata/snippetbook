@@ -32,7 +32,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="font-lato bg-slate-100">
         <SideBar />
         <Outlet />
         <ScrollRestoration />
