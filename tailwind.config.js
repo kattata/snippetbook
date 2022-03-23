@@ -1,7 +1,11 @@
 module.exports = {
   content: ["./app/**/*.jsx"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        latot: ['"Lato"', "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
