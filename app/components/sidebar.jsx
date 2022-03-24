@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Link } from "remix";
 import "../styles/global.css";
 
 const SideBar = () => {
   const snippetId = "234567";
   return (
-    <div className="bg-white h-screen w-80 fixed p-5">
+    <div className="bg-white h-screen w-80 fixed p-5 shadow-md">
       <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
       <div className="flex justify-between">
         <h3 className="font-bold">Your snippets</h3>
@@ -24,9 +23,7 @@ const SideBar = () => {
           id=""
           className="border-solid border-slate-400 border rounded-sm px-2 py-1 text-slate-400 mt-2 w-full"
         >
-          <option value="Filter by" selected>
-            Filter by
-          </option>
+          <option defaultValue="Filter by">Filter by</option>
           <option value="Date updated">Date updated</option>
           <option value="Title">Title</option>
           <option value="Favorited">Favorited</option>
