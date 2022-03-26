@@ -6,9 +6,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "remix";
 import styles from "~/tailwind.css";
 import SideBar from "./components/sidebar";
+import connectDb from "./db/connectDb.server";
 
 export const links = () => [
   {
@@ -25,7 +27,13 @@ export function meta() {
   };
 }
 
+export async function loader() {
+  const db = await connectDb();
+  return db.models.Snippet.find();
+}
+
 export default function App() {
+  const snippets = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -33,7 +41,7 @@ export default function App() {
         <Links />
       </head>
       <body className="font-lato bg-slate-100">
-        <SideBar />
+        <SideBar snippets={snippets} />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

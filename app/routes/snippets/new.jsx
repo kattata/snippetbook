@@ -17,15 +17,14 @@ export async function action({ request }) {
     snippet
   );
 
-  // console.log({
-  //   title,
-  //   description,
-  //   language,
-  //   snippet,
-  // });
+  console.log({
+    title,
+    description,
+    language,
+    snippet,
+  });
 
-  // return redirect(`/snippets`);
-  return console.log(newSnippet);
+  return redirect(`/snippets`);
 }
 
 export default function CreateSnippet() {

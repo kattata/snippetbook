@@ -1,7 +1,7 @@
 import { Link } from "remix";
 import "../styles/global.css";
 
-const SideBar = () => {
+const SideBar = ({ snippets }) => {
   const snippetId = "234567";
   return (
     <div className="bg-white h-screen w-80 fixed p-5 shadow-md">
@@ -29,29 +29,22 @@ const SideBar = () => {
           <option value="Favorited">Favorited</option>
         </select>
       </div>
-      <Link to={`/snippets/${snippetId}`}>
-        <div className="border-solid border-slate-400 border rounded-sm p-3 mt-2 w-full">
-          <h3 className="font-bold mb-4">Remix Loader</h3>
-          <div className="flex justify-between">
-            <p className="text-slate-500 uppercase text-[12px]">JavaScript</p>
-            <p className="text-slate-500 text-[12px]">23 Mar 2023</p>
-          </div>
-        </div>
-      </Link>
-      <div className="border-solid border-slate-400 border rounded-sm p-3 mt-2 w-full">
-        <h3 className="font-bold mb-4">Remix Loader</h3>
-        <div className="flex justify-between">
-          <p className="text-slate-500 uppercase text-[12px]">JavaScript</p>
-          <p className="text-slate-500 text-[12px]">23 Mar 2023</p>
-        </div>
-      </div>
-      <div className="border-solid border-slate-400 border rounded-sm p-3 mt-2 w-full">
-        <h3 className="font-bold mb-4">Remix Loader</h3>
-        <div className="flex justify-between">
-          <p className="text-slate-500 uppercase text-[12px]">JavaScript</p>
-          <p className="text-slate-500 text-[12px]">23 Mar 2023</p>
-        </div>
-      </div>
+      {snippets &&
+        snippets.map((snippet) => {
+          return (
+            <Link to={`/snippets/${snippet._id}`} key={snippet._id}>
+              <div className="border-solid border-slate-400 border rounded-sm p-3 mt-2 w-full">
+                <h3 className="font-bold mb-4">{snippet.title}</h3>
+                <div className="flex justify-between">
+                  <p className="text-slate-500 uppercase text-[12px]">
+                    JavaScript
+                  </p>
+                  <p className="text-slate-500 text-[12px]">23 Mar 2023</p>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
     </div>
   );
 };
