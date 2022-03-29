@@ -29,9 +29,9 @@ export async function action({ request }) {
 
 export default function CreateSnippet() {
   return (
-    <div className="absolute left-80 top-0 w-[calc(100%-320px)] h-full">
-      <div className="absolute h-full w-[970px] bg-white top-5 left-1/2 -translate-x-1/2 p-8 shadow-md">
-        <h1 className="font-bold text-2xl mb-4">Add a new code snippet</h1>
+    <div className="wrapper">
+      <div className="wrapper-inner">
+        <h1 className="h1">Add a new code snippet</h1>
         <form method="post" className="flex justify-between gap-5">
           <div className="w-1/2">
             <Input label="Title" name="title" />
@@ -54,7 +54,7 @@ export default function CreateSnippet() {
         </form>
         <button
           type="submit"
-          className="bg-slate-900 text-white uppercase py-2 px-7 rounded text-sm font-bold ml-auto mr-0 mt-4 block"
+          className="bg-slate-800 text-white uppercase py-2 px-7 rounded text-sm font-bold ml-auto mr-0 mt-4 block"
         >
           Submit
         </button>
