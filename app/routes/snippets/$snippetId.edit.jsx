@@ -18,6 +18,7 @@ export async function action({ request, params }) {
         description,
         language,
         snippet,
+        date_updated: Date.now(),
       }
     );
     return redirect(`/snippets/${params.snippetId}`);

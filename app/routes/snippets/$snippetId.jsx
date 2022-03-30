@@ -4,6 +4,11 @@ import trash from "~/assets/ant-design_delete-outlined.svg";
 import edit from "~/assets/ant-design_edit-outlined.svg";
 import star from "~/assets/ant-design_star-outlined.svg";
 
+export async function loader({ params }) {
+  const db = await connectDb();
+  return db.models.Snippet.findById(params.snippetId);
+}
+
 export const action = async function ({ request, params }) {
   const form = await request.formData();
   const db = await connectDb();
@@ -22,11 +27,6 @@ export const action = async function ({ request, params }) {
     }
   }
 };
-
-export async function loader({ params }) {
-  const db = await connectDb();
-  return db.models.Snippet.findById(params.snippetId);
-}
 
 export default function Snippet() {
   const snippet = useLoaderData();

@@ -16,7 +16,7 @@ export async function action({ request }) {
       description,
       language,
       snippet,
-      date_added: Date.now(),
+      date_updated: Date.now(),
     });
     return redirect(`/`);
   } catch (error) {

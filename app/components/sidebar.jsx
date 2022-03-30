@@ -1,8 +1,38 @@
-import { Link } from "remix";
+import { Link, useLoaderData } from "remix";
 import "../styles/global.css";
 import plus from "~/assets/ant-design_plus-outlined.svg";
+import { useState } from "react";
+import connectDb from "~/db/connectDb.server";
 
-const SideBar = ({ snippets }) => {
+export async function loader() {
+  const db = await connectDb();
+  const snippets = await db.models.Snippet.find();
+  return snippets;
+}
+
+const SideBar = () => {
+  const [selectedOption, setSelectedOption] = useState("sortBy");
+  let snippets = useLoaderData();
+
+  const sortBy = (e) => {
+    setSelectedOption(e.target.value);
+    console.log(e.target.value);
+
+    if (e.target.value == "title") {
+      const sortedSnippets = snippets.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      snippets = sortedSnippets;
+    }
+
+    if (e.target.value == "dateUpdated") {
+      const sortedSnippets = snippets.sort(
+        (a, b) => b.date_updated - a.date_updated
+      );
+      snippets = sortedSnippets;
+    }
+  };
+
   return (
     <div className="bg-white h-screen w-80 fixed p-5 shadow-md">
       <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
@@ -24,31 +54,34 @@ const SideBar = ({ snippets }) => {
           name=""
           id=""
           className="grey-border px-2 py-1 text-slate-400 mt-2 w-full"
+          onChange={sortBy}
+          value={selectedOption}
         >
-          <option defaultValue="Filter by">Filter by</option>
-          <option value="Date updated">Date updated</option>
-          <option value="Title">Title</option>
-          <option value="Favorited">Favorited</option>
+          <option defaultValue="sortBy">Sort by</option>
+          <option value="dateUpdated">Date updated</option>
+          <option value="title">Title</option>
+          <option value="favorited">Favorited</option>
         </select>
       </div>
-      {snippets &&
-        snippets.map((snippet) => {
+      <div className="h-3/4 overflow-scroll">
+        {snippets.map((snippet) => {
           return (
-            <Link to={`/snippets/${snippet._id}`} key={snippet._id}>
+            <Link to={`/snippets/${snippet?._id}`} key={snippet?._id}>
               <div className="grey-border p-3 mt-2 w-full">
-                <h3 className="font-bold mb-4">{snippet.title}</h3>
+                <h3 className="font-bold mb-4">{snippet?.title}</h3>
                 <div className="flex justify-between">
                   <p className="text-slate-500 uppercase text-[12px]">
-                    {snippet.language}
+                    {snippet?.language}
                   </p>
                   <p className="text-slate-500 text-[12px]">
-                    {snippet?.date_added}
+                    {snippet?.date_updated}
                   </p>
                 </div>
               </div>
             </Link>
           );
         })}
+      </div>
     </div>
   );
 };
