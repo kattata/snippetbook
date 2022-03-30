@@ -55,7 +55,7 @@ export default function Snippet() {
         </div>
         <span className="bg-slate-300 block h-[1px] w-full mt-2 mb-3"></span>
         <p className="text-slate-400 text-xs absolute right-10">
-          {snippet?.date_added}
+          {snippet?.date_updated}
         </p>
         <h1 className="h1">{snippet?.title}</h1>
         <p className="mb-8">{snippet?.description}</p>

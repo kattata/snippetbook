@@ -23,7 +23,9 @@ const SideBar = () => {
     }
 
     if (e.target.value == "dateUpdated") {
-      sortedSnippets = snippets.sort((a, b) => b.date_updated - a.date_updated);
+      sortedSnippets = snippets.sort(
+        (a, b) => new Date(b.date_updated) - new Date(a.date_updated)
+      );
     }
 
     snippets = sortedSnippets;
