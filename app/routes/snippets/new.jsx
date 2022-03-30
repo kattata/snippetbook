@@ -12,14 +12,15 @@ export async function action({ request }) {
   const snippet = form.get("snippet");
 
   try {
-    await db.models.Snippet.create({
+    const result = await db.models.Snippet.create({
       title,
       description,
       language,
       snippet,
+      favorite: false,
       date_updated: Date.now(),
     });
-    return redirect(`/`);
+    return redirect(`/snippets/${result._id}`);
   } catch (error) {
     return json(
       { errors: error.errors, values: Object.fromEntries(form) },

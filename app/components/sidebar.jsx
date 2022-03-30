@@ -3,6 +3,8 @@ import "../styles/global.css";
 import plus from "~/assets/ant-design_plus-outlined.svg";
 import { useState } from "react";
 import connectDb from "~/db/connectDb.server";
+import greyStar from "~/assets/ant-design_star-outlined.svg";
+import yellowStar from "~/assets/ant-design_star-filled.svg";
 
 export async function loader() {
   const db = await connectDb();
@@ -48,9 +50,8 @@ const SideBar = () => {
         <input
           type="text"
           placeholder="Search"
-          className="grey-border px-2 py-1 text-slate-400 w-full"
+          className="grey-border px-2 py-1 text-slate-400 w-full mb-2"
         />
-        <label className="text-xs mb-0">Sort by</label>
         <select
           name=""
           id=""
@@ -65,12 +66,19 @@ const SideBar = () => {
           <option value="favorited">Favorited</option>
         </select>
       </div>
-      <div className="h-3/4 overflow-scroll">
+      <div className="h-[70%] overflow-scroll">
         {snippets.map((snippet) => {
           return (
             <Link to={`/snippets/${snippet?._id}`} key={snippet?._id}>
               <div className="grey-border p-3 mt-2 w-full">
-                <h3 className="font-bold mb-4">{snippet?.title}</h3>
+                <div className="flex justify-between">
+                  <h3 className="font-bold mb-4">{snippet?.title}</h3>
+                  <img
+                    src={snippet.favorite ? yellowStar : greyStar}
+                    alt="Add to Favorites"
+                    className="h-5"
+                  />
+                </div>
                 <div className="flex justify-between">
                   <p className="text-slate-500 uppercase text-[12px]">
                     {snippet?.language}

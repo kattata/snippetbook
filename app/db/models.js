@@ -7,7 +7,7 @@ const snippetSchema = new Schema({
   description: String,
   language: String,
   date_updated: Date,
-  // favorite: Boolean,
+  favorite: Boolean,
   snippet: String,
 });
 
