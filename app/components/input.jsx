@@ -1,11 +1,4 @@
-export default function Input({
-  label,
-  name,
-  isTextarea,
-  rows,
-  isEdit,
-  value,
-}) {
+export default function Input({ label, name, isTextarea, rows, value }) {
   return (
     <div className="flex flex-col">
       <label htmlFor={name} className="mb-1 mt-3">

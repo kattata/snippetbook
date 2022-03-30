@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Form, json, Link, redirect, useLoaderData } from "remix";
+import { Form, Link, redirect, useLoaderData } from "remix";
 import connectDb from "~/db/connectDb.server";
 import seedData from "~/db/seed.json";
 
@@ -26,7 +25,6 @@ export async function action() {
 
 export default function Seed() {
   const { currentSnippetsCount, seededSnippets } = useLoaderData();
-  //   const [seedSnippets, setSeedSnippets] = useState();
   return (
     <div className="wrapper">
       <div className="wrapper-inner">

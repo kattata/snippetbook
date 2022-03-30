@@ -16,21 +16,17 @@ const SideBar = () => {
 
   const sortBy = (e) => {
     setSelectedOption(e.target.value);
-    console.log(e.target.value);
+    let sortedSnippets = [];
 
     if (e.target.value == "title") {
-      const sortedSnippets = snippets.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
-      snippets = sortedSnippets;
+      sortedSnippets = snippets.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     if (e.target.value == "dateUpdated") {
-      const sortedSnippets = snippets.sort(
-        (a, b) => b.date_updated - a.date_updated
-      );
-      snippets = sortedSnippets;
+      sortedSnippets = snippets.sort((a, b) => b.date_updated - a.date_updated);
     }
+
+    snippets = sortedSnippets;
   };
 
   return (
@@ -52,18 +48,18 @@ const SideBar = () => {
           placeholder="Search"
           className="grey-border px-2 py-1 text-slate-400 w-full"
         />
-        <label>Sort by</label>
+        <label className="text-xs mb-0">Sort by</label>
         <select
           name=""
           id=""
-          className="grey-border px-2 py-1 text-slate-400 mt-2 w-full"
+          className="grey-border px-2 py-1 text-slate-400 w-full"
           onChange={sortBy}
           value={selectedOption}
         >
-          <option value="title">Title</option>
           <option value="dateUpdated" defaultValue="dateUpdated">
             Date updated
           </option>
+          <option value="title">Title</option>
           <option value="favorited">Favorited</option>
         </select>
       </div>
