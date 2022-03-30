@@ -41,7 +41,9 @@ const SideBar = ({ snippets }) => {
                   <p className="text-slate-500 uppercase text-[12px]">
                     {snippet.language}
                   </p>
-                  <p className="text-slate-500 text-[12px]">23 Mar 2023</p>
+                  <p className="text-slate-500 text-[12px]">
+                    {snippet?.date_added}
+                  </p>
                 </div>
               </div>
             </Link>
