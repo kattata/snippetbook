@@ -1,17 +1,10 @@
-import {
-  Form,
-  json,
-  Link,
-  redirect,
-  useActionData,
-  useLoaderData,
-  useParams,
-} from "remix";
+import { Form, json, Link, redirect, useLoaderData, useParams } from "remix";
 import connectDb from "~/db/connectDb.server";
 import trash from "~/assets/ant-design_delete-outlined.svg";
 import edit from "~/assets/ant-design_edit-outlined.svg";
 import greyStar from "~/assets/ant-design_star-outlined.svg";
 import yellowStar from "~/assets/ant-design_star-filled.svg";
+import { formatDate } from "~/utils/helpers";
 
 export async function loader({ params }) {
   const db = await connectDb();
@@ -103,7 +96,7 @@ export default function Snippet() {
         </div>
         <span className="bg-slate-300 block h-[1px] w-full mt-2 mb-3"></span>
         <p className="text-slate-400 text-xs absolute right-10">
-          {snippet?.date_updated}
+          {formatDate(snippet?.date_updated)}
         </p>
         <h1 className="h1">{snippet?.title}</h1>
         <p className="mb-8">{snippet?.description}</p>

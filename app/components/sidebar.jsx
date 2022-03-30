@@ -5,6 +5,7 @@ import { useState } from "react";
 import connectDb from "~/db/connectDb.server";
 import greyStar from "~/assets/ant-design_star-outlined.svg";
 import yellowStar from "~/assets/ant-design_star-filled.svg";
+import { formatDate } from "~/utils/helpers";
 
 export async function loader() {
   const db = await connectDb();
@@ -60,7 +61,7 @@ const SideBar = () => {
           value={selectedOption}
         >
           <option value="dateUpdated" defaultValue="dateUpdated">
-            Date updated
+            Last updated
           </option>
           <option value="title">Title</option>
           <option value="favorited">Favorited</option>
@@ -84,7 +85,7 @@ const SideBar = () => {
                     {snippet?.language}
                   </p>
                   <p className="text-slate-500 text-[12px]">
-                    {snippet?.date_updated}
+                    {formatDate(snippet?.date_updated)}
                   </p>
                 </div>
               </div>
