@@ -35,7 +35,9 @@ const SideBar = () => {
 
   return (
     <div className="bg-white h-screen w-80 fixed p-5 shadow-md">
-      <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
+      <Link to="/snippets">
+        <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
+      </Link>
       <div className="flex justify-between items-center">
         <h3 className="font-bold">Your snippets</h3>
         <Link to="/snippets/new">
@@ -50,6 +52,7 @@ const SideBar = () => {
           placeholder="Search"
           className="grey-border px-2 py-1 text-slate-400 w-full"
         />
+        <label>Sort by</label>
         <select
           name=""
           id=""
@@ -57,9 +60,10 @@ const SideBar = () => {
           onChange={sortBy}
           value={selectedOption}
         >
-          <option defaultValue="sortBy">Sort by</option>
-          <option value="dateUpdated">Date updated</option>
           <option value="title">Title</option>
+          <option value="dateUpdated" defaultValue="dateUpdated">
+            Date updated
+          </option>
           <option value="favorited">Favorited</option>
         </select>
       </div>
