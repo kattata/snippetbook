@@ -5,6 +5,7 @@ import edit from "~/assets/ant-design_edit-outlined.svg";
 import greyStar from "~/assets/ant-design_star-outlined.svg";
 import yellowStar from "~/assets/ant-design_star-filled.svg";
 import { formatDate } from "~/utils/helpers";
+import Favorite, { toggleFavorite } from "~/components/favorite";
 
 export async function loader({ params }) {
   const db = await connectDb();
@@ -30,30 +31,8 @@ export const action = async function ({ request, params }) {
     }
   }
 
-  if (form.get("_method") === "favorite") {
-    try {
-      if (form.get("_toggle") === "add") {
-        await db.models.Snippet.findByIdAndUpdate(
-          { _id: id },
-          { $set: { favorite: true } }
-        );
-      }
-
-      if (form.get("_toggle") === "remove") {
-        await db.models.Snippet.findByIdAndUpdate(
-          { _id: id },
-          { $set: { favorite: false } }
-        );
-      }
-
-      return null;
-    } catch (error) {
-      return error;
-      // return json(
-      //   { errors: error.errors, values: Object.fromEntries(form) },
-      //   { status: 400 }
-      // );
-    }
+  if (toggleFavorite(form, id)) {
+    return null;
   }
 };
 
@@ -66,21 +45,7 @@ export default function Snippet() {
         <div className="flex justify-between items-center text-slate-400 text-xs">
           <p className="uppercase">{snippet?.language}</p>
           <div className="flex gap-2">
-            <Form method="post">
-              <input type="hidden" name="_method" value="favorite" />
-              <input
-                type="hidden"
-                name="_toggle"
-                value={snippet.favorite ? "remove" : "add"}
-              />
-              <button className="p-1" type="submit">
-                <img
-                  src={snippet.favorite ? yellowStar : greyStar}
-                  alt="Add to Favorites"
-                  className="h-5"
-                />
-              </button>
-            </Form>
+            <Favorite snippet={snippet} />
             <Link to={`/snippets/${params.snippetId}/edit`}>
               <button className="p-1">
                 <img src={edit} alt="Edit" className="h-5" />

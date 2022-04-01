@@ -6,12 +6,17 @@ import connectDb from "~/db/connectDb.server";
 import greyStar from "~/assets/ant-design_star-outlined.svg";
 import yellowStar from "~/assets/ant-design_star-filled.svg";
 import { formatDate } from "~/utils/helpers";
+import Favorite, { toggleFavorite } from "./favorite";
 
-export async function loader() {
-  const db = await connectDb();
-  const snippets = await db.models.Snippet.find();
-  return snippets;
-}
+// export async function action({ request }) {
+//   // return console.log(request);
+//   const form = await request.formData();
+//   console.log(form);
+//   // const id = form.get("_id");
+//   // if (toggleFavorite(form, id)) {
+//   //   return null;
+//   // }
+// }
 
 const SideBar = () => {
   const [selectedOption, setSelectedOption] = useState("sortBy");
@@ -67,29 +72,27 @@ const SideBar = () => {
           <option value="favorited">Favorited</option>
         </select>
       </div>
-      <div className="h-[70%] overflow-scroll">
+      <div className="h-[70%] overflow-y-scroll">
         {snippets.map((snippet) => {
           return (
-            <Link to={`/snippets/${snippet?._id}`} key={snippet?._id}>
-              <div className="grey-border p-3 mt-2 w-full">
-                <div className="flex justify-between">
-                  <h3 className="font-bold mb-4">{snippet?.title}</h3>
-                  <img
-                    src={snippet.favorite ? yellowStar : greyStar}
-                    alt="Add to Favorites"
-                    className="h-5"
-                  />
+            <div key={snippet?._id} className="relative">
+              <Favorite snippet={snippet} inSidebar={true} />
+              <Link to={`/snippets/${snippet?._id}`}>
+                <div className="grey-border p-3 mt-2 w-full" key={snippet._id}>
+                  <div className="flex justify-between">
+                    <h3 className="font-bold mb-4">{snippet?.title}</h3>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-slate-500 uppercase text-[12px]">
+                      {snippet?.language}
+                    </p>
+                    <p className="text-slate-500 text-[12px]">
+                      {formatDate(snippet?.date_updated)}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-slate-500 uppercase text-[12px]">
-                    {snippet?.language}
-                  </p>
-                  <p className="text-slate-500 text-[12px]">
-                    {formatDate(snippet?.date_updated)}
-                  </p>
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })}
       </div>
