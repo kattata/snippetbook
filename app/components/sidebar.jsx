@@ -2,25 +2,13 @@ import { Link, useLoaderData } from "remix";
 import "../styles/global.css";
 import plus from "~/assets/ant-design_plus-outlined.svg";
 import { useState } from "react";
-import connectDb from "~/db/connectDb.server";
-import greyStar from "~/assets/ant-design_star-outlined.svg";
-import yellowStar from "~/assets/ant-design_star-filled.svg";
 import { formatDate } from "~/utils/helpers";
-import Favorite, { toggleFavorite } from "./favorite";
-
-// export async function action({ request }) {
-//   // return console.log(request);
-//   const form = await request.formData();
-//   console.log(form);
-//   // const id = form.get("_id");
-//   // if (toggleFavorite(form, id)) {
-//   //   return null;
-//   // }
-// }
+import Favorite from "./favorite";
 
 const SideBar = () => {
+  let data = useLoaderData();
   const [selectedOption, setSelectedOption] = useState("sortBy");
-  let snippets = useLoaderData();
+  const [snippets, setSnippets] = useState(data);
 
   const sortBy = (e) => {
     setSelectedOption(e.target.value);
@@ -36,7 +24,19 @@ const SideBar = () => {
       );
     }
 
-    snippets = sortedSnippets;
+    setSnippets(sortedSnippets);
+  };
+
+  const handleSearch = (e) => {
+    let input = e.target.value.toLowerCase();
+    let filtered = snippets.filter((snippet) =>
+      snippet.title.toLowerCase().includes(input)
+    );
+    if (input == "") {
+      setSnippets(data);
+    } else {
+      setSnippets(filtered);
+    }
   };
 
   return (
@@ -57,10 +57,9 @@ const SideBar = () => {
           type="text"
           placeholder="Search"
           className="grey-border px-2 py-1 text-slate-400 w-full mb-2"
+          onChange={handleSearch}
         />
         <select
-          name=""
-          id=""
           className="grey-border px-2 py-1 text-slate-400 w-full"
           onChange={sortBy}
           value={selectedOption}
