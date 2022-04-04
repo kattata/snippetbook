@@ -39,12 +39,12 @@ export async function action({ request }) {
   const id = form.get("_id");
   console.log(id);
   if (toggleFavorite(form, id)) {
-    console.log(await request.formData());
     return redirect(`/snippets/${id}`);
   }
 }
 
 export default function App() {
+  const snippets = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -52,7 +52,7 @@ export default function App() {
         <Links />
       </head>
       <body className="font-lato bg-slate-100">
-        <SideBar />
+        <SideBar data={snippets} />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

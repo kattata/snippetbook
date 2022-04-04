@@ -5,13 +5,26 @@ import { useState } from "react";
 import { formatDate } from "~/utils/helpers";
 import Favorite from "./favorite";
 
-const SideBar = () => {
-  let data = useLoaderData();
-  const [selectedOption, setSelectedOption] = useState("sortBy");
+const SideBar = ({ data }) => {
+  // let data = useLoaderData();
+  const [selectedSort, setSelectedSort] = useState("sortBy");
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [snippets, setSnippets] = useState(data);
 
+  const handleSearch = (e) => {
+    let input = e.target.value.toLowerCase();
+    let filtered = snippets.filter((snippet) =>
+      snippet.title.toLowerCase().includes(input)
+    );
+    if (input == "") {
+      setSnippets(data);
+    } else {
+      setSnippets(filtered);
+    }
+  };
+
   const sortBy = (e) => {
-    setSelectedOption(e.target.value);
+    setSelectedSort(e.target.value);
     let sortedSnippets = [];
 
     if (e.target.value == "title") {
@@ -27,16 +40,21 @@ const SideBar = () => {
     setSnippets(sortedSnippets);
   };
 
-  const handleSearch = (e) => {
-    let input = e.target.value.toLowerCase();
-    let filtered = snippets.filter((snippet) =>
-      snippet.title.toLowerCase().includes(input)
-    );
-    if (input == "") {
-      setSnippets(data);
-    } else {
-      setSnippets(filtered);
+  const filter = (e) => {
+    setSelectedFilter(e.target.value);
+    let filteredSnippets = [];
+
+    if (e.target.value == "favorites") {
+      filteredSnippets = snippets.filter(
+        (snippet) => snippet.favorite === true
+      );
     }
+
+    if (e.target.value == "all") {
+      filteredSnippets = data;
+    }
+
+    setSnippets(filteredSnippets);
   };
 
   return (
@@ -59,17 +77,30 @@ const SideBar = () => {
           className="grey-border px-2 py-1 text-slate-400 w-full mb-2"
           onChange={handleSearch}
         />
-        <select
-          className="grey-border px-2 py-1 text-slate-400 w-full"
-          onChange={sortBy}
-          value={selectedOption}
-        >
-          <option value="dateUpdated" defaultValue="dateUpdated">
-            Last updated
-          </option>
-          <option value="title">Title</option>
-          <option value="favorited">Favorited</option>
-        </select>
+        <div className="flex gap-2">
+          <div>
+            <label>Sort by</label>
+            <select
+              className="grey-border px-2 py-1 text-slate-400 w-full"
+              onChange={sortBy}
+              value={selectedSort}
+            >
+              <option value="dateUpdated">Last updated</option>
+              <option value="title">Title</option>
+            </select>
+          </div>
+          <div>
+            <label>Filter</label>
+            <select
+              className="grey-border px-2 py-1 text-slate-400 w-full"
+              onChange={filter}
+              value={selectedFilter}
+            >
+              <option value="all">All</option>
+              <option value="favorited">Favorited</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div className="h-[70%] overflow-y-scroll">
         {snippets.map((snippet) => {
