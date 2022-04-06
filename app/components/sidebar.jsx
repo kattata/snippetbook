@@ -58,7 +58,7 @@ const SideBar = ({ data }) => {
   };
 
   return (
-    <div className="bg-white h-screen w-80 fixed p-5 shadow-md">
+    <div className="bg-white h-full w-80 fixed p-5 shadow-md">
       <Link to="/snippets">
         <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
       </Link>

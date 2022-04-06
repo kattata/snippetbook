@@ -51,7 +51,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="font-lato bg-slate-100">
+      <body className="font-lato bg-slate-100 flex justify-between">
         <SideBar data={snippets} />
         <Outlet />
         <ScrollRestoration />

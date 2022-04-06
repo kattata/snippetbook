@@ -66,7 +66,9 @@ export default function Snippet() {
         <h1 className="h1">{snippet?.title}</h1>
         <p className="mb-8">{snippet?.description}</p>
         <div className="grey-border p-6">
-          <pre>{snippet?.snippet}</pre>
+          <pre className="overflow-x-auto whitespace-pre-wrap">
+            {snippet?.snippet}
+          </pre>
         </div>
       </div>
     </div>
