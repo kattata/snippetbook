@@ -1,6 +1,7 @@
 import { Link } from "remix";
 import "../styles/global.css";
 import plus from "~/assets/ant-design_plus-outlined.svg";
+import logo from "~/assets/bi_code-slash.svg";
 import { useEffect, useState } from "react";
 import { formatDate } from "~/utils/helpers";
 import Favorite from "./favorite";
@@ -63,7 +64,10 @@ const SideBar = ({ data }) => {
   return (
     <div className="bg-white h-full w-80 fixed p-5 shadow-md">
       <Link to="/snippets">
-        <h2 className="font-bold text-xl mb-6">SnippetBook</h2>
+        <div className="flex items-center mb-6">
+          <img src={logo} alt="SnippetBook Logo" className="h-6" />
+          <h2 className="font-bold text-xl ml-2">SnippetBook</h2>
+        </div>
       </Link>
       <div className="flex justify-between items-center">
         <h3 className="font-bold">Your snippets</h3>

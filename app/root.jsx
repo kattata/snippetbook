@@ -1,6 +1,5 @@
 import {
   Links,
-  Link,
   LiveReload,
   Meta,
   Outlet,
@@ -10,6 +9,7 @@ import {
   redirect,
 } from "remix";
 import styles from "~/tailwind.css";
+import favicon from "~/assets/bi_code-slash.svg";
 import { toggleFavorite } from "./components/favorite";
 import SideBar from "./components/sidebar";
 import connectDb from "./db/connectDb.server";
@@ -18,6 +18,11 @@ export const links = () => [
   {
     rel: "stylesheet",
     href: styles,
+  },
+  {
+    rel: "icon",
+    type: "image/x-icon",
+    href: favicon,
   },
 ];
 
