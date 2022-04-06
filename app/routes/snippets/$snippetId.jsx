@@ -2,8 +2,6 @@ import { Form, json, Link, redirect, useLoaderData, useParams } from "remix";
 import connectDb from "~/db/connectDb.server";
 import trash from "~/assets/ant-design_delete-outlined.svg";
 import edit from "~/assets/ant-design_edit-outlined.svg";
-import greyStar from "~/assets/ant-design_star-outlined.svg";
-import yellowStar from "~/assets/ant-design_star-filled.svg";
 import { formatDate } from "~/utils/helpers";
 import Favorite, { toggleFavorite } from "~/components/favorite";
 

@@ -37,7 +37,6 @@ export async function loader() {
 export async function action({ request }) {
   const form = await request.formData();
   const id = form.get("_id");
-  console.log(id);
   if (toggleFavorite(form, id)) {
     return redirect(`/snippets/${id}`);
   }

@@ -1,15 +1,18 @@
-import { Link, useLoaderData } from "remix";
+import { Link } from "remix";
 import "../styles/global.css";
 import plus from "~/assets/ant-design_plus-outlined.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate } from "~/utils/helpers";
 import Favorite from "./favorite";
 
 const SideBar = ({ data }) => {
-  // let data = useLoaderData();
   const [selectedSort, setSelectedSort] = useState("sortBy");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [snippets, setSnippets] = useState(data);
+
+  useEffect(() => {
+    setSnippets(data);
+  }, [data]);
 
   const handleSearch = (e) => {
     let input = e.target.value.toLowerCase();
@@ -97,7 +100,7 @@ const SideBar = ({ data }) => {
               value={selectedFilter}
             >
               <option value="all">All</option>
-              <option value="favorited">Favorited</option>
+              <option value="favorites">Favorited</option>
             </select>
           </div>
         </div>
