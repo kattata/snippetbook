@@ -66,27 +66,14 @@ const SideBar = ({ data }) => {
       <Link to="/snippets">
         <div className="flex items-center mb-6">
           <img src={logo} alt="SnippetBook Logo" className="h-6" />
-          <h2 className="font-bold text-xl ml-2">SnippetBook</h2>
+          <h2 className="font-bold text-xl ml-3">SnippetBook</h2>
         </div>
       </Link>
-      <div className="flex justify-between items-center">
-        <h3 className="font-bold">Your snippets</h3>
-        <Link to="/snippets/new">
-          <div className="bg-slate-800 w-5 h-5 rounded-full flex items-center justify-center">
-            <img src={plus} alt="Plus" className="h-3 w-3" />
-          </div>
-        </Link>
-      </div>
+
       <div className="mt-6 mb-6">
-        <input
-          type="text"
-          placeholder="Search"
-          className="grey-border px-2 py-1 text-slate-400 w-full mb-2"
-          onChange={handleSearch}
-        />
         <div className="flex gap-2">
           <div>
-            <label>Sort by</label>
+            <label className="text-xs">Sort by</label>
             <select
               className="grey-border px-2 py-1 text-slate-400 w-full"
               onChange={sortBy}
@@ -97,7 +84,7 @@ const SideBar = ({ data }) => {
             </select>
           </div>
           <div>
-            <label>Filter</label>
+            <label className="text-xs">Filter</label>
             <select
               className="grey-border px-2 py-1 text-slate-400 w-full"
               onChange={filter}
@@ -108,8 +95,22 @@ const SideBar = ({ data }) => {
             </select>
           </div>
         </div>
+        <input
+          type="text"
+          placeholder="Search"
+          className="grey-border px-2 py-1 mt-3 text-slate-400 w-full mb-2"
+          onChange={handleSearch}
+        />
       </div>
-      <div className="h-[70%] overflow-y-scroll">
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="font-bold">Your snippets</h3>
+        <Link to="/snippets/new">
+          <div className="bg-slate-800 w-5 h-5 rounded-full flex items-center justify-center">
+            <img src={plus} alt="Plus" className="h-3 w-3" />
+          </div>
+        </Link>
+      </div>
+      <div className="h-[70%] overflow-y-scroll pb-5">
         {snippets.map((snippet) => {
           return (
             <div key={snippet?._id} className="relative">
